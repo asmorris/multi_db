@@ -1,0 +1,68 @@
+<div class="max-w-4xl mx-auto p-6">
+
+<div
+  data-signals="{response: '', answer: ''}"
+  data-computed-correct="$response.toLowerCase() == $answer"
+>
+  <div id="question"></div>
+  <button data-on-click="@get('/test')">Fetch a question</button>
+  <button
+    data-show="$answer != ''"
+    data-on-click="$response = prompt('Answer:') ?? ''"
+    style="display: none"
+  >
+    BUZZ
+  </button>
+  <div data-show="$response != ''">
+    You answered “<span data-text="$response"></span>”.
+    <span data-show="$correct">That is correct ✅</span>
+    <span data-show="!$correct">
+      The correct answer is “<span data-text="$answer"></span>” 🤷
+    </span>
+  </div>
+</div>
+
+
+  <h1 class="text-5xl font-bold text-center mb-8">Here's a list of my posts</h1>
+
+  <!-- Form for creating new posts -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4">Add a New Post</h2>
+    <%= form_with model: @post, local: true, class: "space-y-4" do |form| %>
+      <div>
+        <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent", placeholder: "Enter post name" %>
+        <% if @post.errors[:name].any? %>
+          <div class="text-red-600 text-sm mt-1"><%= @post.errors[:name].first %></div>
+        <% end %>
+      </div>
+      
+      <div>
+        <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.text_area :description, rows: 3, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none", placeholder: "Describe your post..." %>
+        <% if @post.errors[:description].any? %>
+          <div class="text-red-600 text-sm mt-1"><%= @post.errors[:description].first %></div>
+        <% end %>
+      </div>
+      
+      <div class="flex justify-end">
+        <%= form.submit "Create post", class: "bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- List of existing posts -->
+  <div class="bg-white rounded-lg shadow-md p-6" id="posts-list">
+    <h2 class="text-3xl font-bold mb-6 text-center">posts</h2>
+    
+    <% if @posts.any? %>
+      <div id="posts-container">
+        <%= render 'posts_list' %>
+      </div>
+    <% else %>
+      <div id="farts-container">
+        <p class="text-gray-500 text-center italic">No posts yet. Create your first one above!</p>
+      </div>
+    <% end %>
+  </div>
+</div>
