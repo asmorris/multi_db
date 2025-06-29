@@ -1,25 +1,77 @@
 <div class="max-w-4xl mx-auto p-6">
 
-<div
-  data-signals="{response: '', answer: ''}"
-  data-computed-correct="$response.toLowerCase() == $answer"
->
-  <div id="question"></div>
-  <button data-on-click="@get('/test')">Fetch a question</button>
-  <button
-    data-show="$answer != ''"
-    data-on-click="$response = prompt('Answer:') ?? ''"
-    style="display: none"
-  >
-    BUZZ
-  </button>
-  <div data-show="$response != ''">
-    You answered “<span data-text="$response"></span>”.
-    <span data-show="$correct">That is correct ✅</span>
-    <span data-show="!$correct">
-      The correct answer is “<span data-text="$answer"></span>” 🤷
-    </span>
+<!-- Example Datastar thing -->
+<%# <div %>
+<%#   data-signals="{response: '', answer: ''}" %>
+<%#   data-computed-correct="$response.toLowerCase() == $answer" %>
+<%# > %>
+<%#   <div id="question"></div> %>
+<%#   <button data-on-click="@get('/test')">Fetch a question</button> %>
+<%#   <button %>
+<%#     data-show="$answer != ''" %>
+<%#     data-on-click="$response = prompt('Answer:') ?? ''" %>
+<%#     style="display: none" %>
+<%#   > %>
+<%#     BUZZ %>
+<%#   </button> %>
+<%#   <div data-show="$response != ''"> %>
+<%#     You answered “<span data-text="$response"></span>”. %>
+<%#     <span data-show="$correct">That is correct ✅</span> %>
+<%#     <span data-show="!$correct"> %>
+<%#       The correct answer is “<span data-text="$answer"></span>” 🤷 %>
+<%#     </span> %>
+<%#   </div> %>
+<%# </div> %>
+
+<!-- Example Badge Components -->
+<div class="mb-8 space-y-4">
+  <h2 class="text-2xl font-bold mb-4">Badge Component Examples</h2>
+  
+  <!-- Basic Badges Row -->
+  <div class="flex flex-wrap gap-2">
+    <%= component 'badge' do %>Badge<% end %>
+    <%= render(Badge::Component.new(variant: :secondary)) do %>Secondary<% end %>
+    <%= render(Badge::Component.new(variant: :destructive)) do %>Destructive<% end %>
+    <%= render(Badge::Component.new(variant: :outline)) do %>Outline<% end %>
   </div>
+
+  <!-- Badges with Icons and Numbers -->
+  <div class="flex flex-wrap gap-2">
+    <%= render(Badge::Component.new(variant: :secondary, icon: "check", html_attributes: { class: "bg-blue-500 text-white" })) do %>
+      Verified
+    <% end %>
+    
+    <%= render(Badge::Component.new(html_attributes: { class: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" })) do %>8<% end %>
+    <%= render(Badge::Component.new(variant: :destructive, html_attributes: { class: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" })) do %>99<% end %>
+    <%= render(Badge::Component.new(variant: :outline, html_attributes: { class: "h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" })) do %>20+<% end %>
+  </div>
+</div>
+
+<!-- Example Card Components -->
+<div class="mb-8 space-y-4">
+  <h2 class="text-2xl font-bold mb-4">Card Component Examples</h2>
+  
+  <!-- Basic Card -->
+  <%= render(Card::Component.new(title: "Basic Card", subtitle: "This is a basic card example")) do %>
+    <p class="text-gray-600">This is the content of a basic card component with shadcn-inspired styling.</p>
+  <% end %>
+  
+  <!-- Elevated Card -->
+  <%= render(Card::Component.new(title: "Elevated Card", variant: :elevated)) do %>
+    <p class="text-gray-600">This card has an elevated shadow for more prominence.</p>
+  <% end %>
+  
+  <!-- Card with Footer -->
+  <%= render(Card::Component.new(
+    title: "Card with Footer", 
+    subtitle: "Example with footer",
+    footer: content_tag(:div, class: "flex gap-2") do
+      content_tag(:button, "Action", class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm") +
+      content_tag(:button, "Cancel", class: "text-gray-500 hover:text-gray-700 px-4 py-2 text-sm")
+    end
+  )) do %>
+    <p class="text-gray-600">This card demonstrates footer content using the footer parameter.</p>
+  <% end %>
 </div>
 
 
