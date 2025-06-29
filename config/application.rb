@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module DataStar
   class Application < Rails::Application
+    config.autoload_paths << Rails.root.join("app", "frontend", "components")
+    config.view_component.preview_paths << Rails.root.join("app", "frontend", "components")
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

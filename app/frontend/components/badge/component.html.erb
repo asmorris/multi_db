@@ -1,0 +1,4 @@
+<span class="<%= badge_classes %>" <%= html_attributes.except(:class).map { |k, v| "#{k}=\"#{v}\"" }.join(" ").html_safe %>>
+  <%= render_icon %>
+  <%= content %>
+</span>

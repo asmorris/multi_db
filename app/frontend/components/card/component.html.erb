@@ -1,0 +1,24 @@
+<div class="<%= card_classes %>" <%= html_attributes.except(:class).map { |k, v| "#{k}=\"#{v}\"" }.join(" ").html_safe %>>
+  <% if title || subtitle %>
+    <div class="<%= header_classes %>">
+      <% if title %>
+        <h3 class="<%= title_classes %>"><%= title %></h3>
+      <% end %>
+      <% if subtitle %>
+        <p class="<%= subtitle_classes %>"><%= subtitle %></p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <% if content %>
+    <div class="<%= content_classes %>">
+      <%= content %>
+    </div>
+  <% end %>
+  
+  <% if footer %>
+    <div class="<%= footer_classes %>">
+      <%= footer %>
+    </div>
+  <% end %>
+</div>
