@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-signals="{ commandOpen: false, theme: window.initialTheme || 'light' }" data-class="{ 'dark': $theme === 'dark'}" data-on-keydown__window="(evt.ctrlKey || evt.metaKey) && evt.key === 'k' && (evt.preventDefault(), $commandOpen = true)">
   <head>
     <title><%= content_for(:title) || "Data Star" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,11 +21,24 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     
+    <%# Initialize theme before DataStar loads %>
+    <script>
+      // Initialize theme from localStorage or system preference
+      const getInitialTheme = () => {
+        const stored = localStorage.getItem('theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      
+      // Set initial theme value for DataStar
+      window.initialTheme = getInitialTheme();
+    </script>
+
     <%# Datastar for reactive frontend %>
     <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.11/bundles/datastar.js"></script>
   </head>
 
-  <body data-signals="{ commandOpen: false }" data-on-keydown__window="(evt.ctrlKey || evt.metaKey) && evt.key === 'k' && (evt.preventDefault(), $commandOpen = true)">
+  <body>
 
   <%= render(Command::Component.new) %>
     <%# <button data-on-click="$commandOpen = true" class="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10">Open dialog</button> %>
@@ -76,6 +89,11 @@
     <%#     </div> %>
     <%# </div> %>
 
+    <div class="fixed top-4 right-10 z-50 flex items-center gap-2">
+      <div class="text-xs bg-background border border-border px-2 py-1 rounded" data-text="'Theme: ' + $theme"></div>
+      <%= render(DarkModeToggle::Component.new) %>
+    </div>
+    
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

@@ -1,0 +1,44 @@
+<button 
+  class="<%= button_class %>"
+  data-class="{'bg-secondary': $theme === 'dark', 'bg-muted': $theme === 'light'}"
+  data-on-click="$theme = ($theme === 'dark' ? 'light' : 'dark'), localStorage.setItem('theme', $theme), console.log('Theme changed to:', $theme)"
+  type="button"
+  role="switch"
+  data-attr-aria-checked="$theme === 'dark' ? 'true' : 'false'"
+  aria-label="Toggle dark mode">
+  
+  <!-- Toggle knob -->
+  <span 
+    class="<%= knob_class %>"
+    data-class="{'translate-x-6 bg-accent': $theme === 'dark', 'translate-x-0 bg-background': $theme === 'light'}">
+    
+    <!-- Sun icon (light mode) -->
+    <svg 
+      class="h-4 w-4 text-yellow-500 transition-all duration-200"
+      data-class="{'opacity-0 scale-0': $theme === 'dark', 'opacity-100 scale-100': $theme === 'light'}"
+      fill="currentColor" 
+      viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+    </svg>
+    
+    <!-- Moon icon (dark mode) -->
+    <svg 
+      class="absolute inset-0 h-4 w-4 text-blue-300 transition-all duration-200 m-1"
+      data-class="{'opacity-100 scale-100': $theme === 'dark', 'opacity-0 scale-0': $theme === 'light'}"
+      fill="currentColor" 
+      viewBox="0 0 20 20">
+      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+    </svg>
+  </span>
+  
+  <!-- Background stars for dark mode -->
+  <div class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+    <div 
+      class="absolute inset-0 transition-opacity duration-300"
+      data-class="{'opacity-60': $theme === 'dark', 'opacity-0': $theme === 'light'}">
+      <div class="absolute top-2 left-3 w-0.5 h-0.5 bg-blue-300 rounded-full"></div>
+      <div class="absolute bottom-2 right-3 w-1 h-1 bg-indigo-300 rounded-full"></div>
+      <div class="absolute top-1.5 right-4 w-0.5 h-0.5 bg-blue-400 rounded-full"></div>
+    </div>
+  </div>
+</button>

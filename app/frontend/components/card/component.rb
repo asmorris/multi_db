@@ -10,20 +10,20 @@ class Card::Component < ApplicationViewComponent
   private
 
   def card_classes
-    base_classes = "rounded-lg border bg-white shadow-sm"
-    
+    base_classes = "rounded-lg border bg-card text-card shadow-sm"
+
     variant_classes = case variant
     when :elevated
       "shadow-md"
     when :outlined
-      "border-2 border-gray-200"
+      "border-2 border-border"
     when :ghost
       "border-transparent shadow-none"
     else
-      "border-gray-200"
+      "border-border"
     end
 
-    [base_classes, variant_classes, html_attributes[:class]].compact.reject(&:empty?).join(" ")
+    class_names(base_classes, variant_classes, html_attributes[:class])
   end
 
   def header_classes
@@ -31,11 +31,11 @@ class Card::Component < ApplicationViewComponent
   end
 
   def title_classes
-    "text-lg font-semibold leading-none tracking-tight"
+    "text-lg font-semibold leading-none tracking-tight text-card"
   end
 
   def subtitle_classes
-    "text-sm text-gray-600"
+    "text-sm text-muted"
   end
 
   def content_classes
