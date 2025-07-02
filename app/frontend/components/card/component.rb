@@ -35,7 +35,7 @@ class Card::Component < ApplicationViewComponent
   end
 
   def subtitle_classes
-    "text-sm text-muted"
+    "text-sm text-muted-foreground"
   end
 
   def content_classes

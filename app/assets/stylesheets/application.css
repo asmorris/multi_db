@@ -140,9 +140,9 @@ body {
 /* Text utilities */
 .text-background { color: var(--background); }
 .text-foreground { color: var(--foreground); }
-.text-card { color: var(--card); }
+.text-card { color: var(--card-foreground); }
 .text-card-foreground { color: var(--card-foreground); }
-.text-popover { color: var(--popover); }
+.text-popover { color: var(--popover-foreground); }
 .text-popover-foreground { color: var(--popover-foreground); }
 .text-primary { color: var(--primary); }
 .text-primary-foreground { color: var(--primary-foreground); }
