@@ -6,6 +6,7 @@ class Card::Component < ApplicationViewComponent
   option :footer, optional: true
   option :variant, default: -> { :default }
   option :html_attributes, default: -> { {} }
+  option :description, optional: true
 
   private
 

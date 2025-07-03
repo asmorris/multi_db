@@ -1,8 +1,6 @@
 <div id='posts-list' class="space-y-4">
   <% @posts.each do |post| %>
     
-    <%= render(Card::Component.new(title: post.name, subtitle: "#{post.name} - #{post.id}")) do %>
-      <p class="text-gray-600"><%= post.description %></p>
-    <% end %>
+    <%= render(Card::Component.new(title: post.name, subtitle: "#{post.name} - #{post.id}", description: post.description)) %>
   <% end %>
 </div>

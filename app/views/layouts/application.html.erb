@@ -93,6 +93,19 @@
       <div class="text-xs bg-background border border-border px-2 py-1 rounded" data-text="'Theme: ' + $theme"></div>
       <%= render(DarkModeToggle::Component.new) %>
     </div>
+
+    <!-- Authentication Navigation -->
+    <nav class="fixed top-4 left-4 z-50 flex items-center gap-2">
+      <div class="text-xs bg-background border border-border px-2 py-1 rounded">
+        <% if Current.account %>
+          <span class="text-green-600 font-medium">Logged in as: <%= Current.account.email %></span>
+          | <a href="/auth/logout" class="text-blue-600 hover:underline">Logout</a>
+        <% else %>
+          <a href="/auth/create-account" class="text-blue-600 hover:underline">Register</a> | 
+          <a href="/auth/login" class="text-blue-600 hover:underline">Login</a>
+        <% end %>
+      </div>
+    </nav>
     
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>

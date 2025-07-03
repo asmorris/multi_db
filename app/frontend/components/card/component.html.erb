@@ -10,9 +10,9 @@
     </div>
   <% end %>
   
-  <% if content %>
+  <% if content || description %>
     <div class="<%= content_classes %>">
-      <%= content %>
+      <%= content || description %>
     </div>
   <% end %>
   

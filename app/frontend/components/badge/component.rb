@@ -10,11 +10,11 @@ class Badge::Component < ApplicationViewComponent
 
   def badge_classes
     base_classes = "inline-flex items-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-    
+
     # Skip variant background colors if custom bg classes are provided
     custom_classes = html_attributes[:class].to_s
     has_custom_bg = custom_classes.match?(/bg-\w+/)
-    
+
     variant_classes = if has_custom_bg
       # Only apply non-background variant styles when custom bg is used
       case variant
@@ -45,7 +45,7 @@ class Badge::Component < ApplicationViewComponent
       "text-xs px-2.5 py-0.5 rounded-full"
     end
 
-    [base_classes, variant_classes, size_classes, html_attributes[:class]].compact.reject(&:empty?).join(" ")
+    [ base_classes, variant_classes, size_classes, html_attributes[:class] ].compact.reject(&:empty?).join(" ")
   end
 
   def icon_size_class
@@ -65,8 +65,8 @@ class Badge::Component < ApplicationViewComponent
 
   def render_icon
     return unless has_icon?
-    
-    icon_class = [icon_size_class, (content? ? "mr-1" : "")].compact.reject(&:empty?).join(" ")
+
+    icon_class = [ icon_size_class, (content? ? "mr-1" : "") ].compact.reject(&:empty?).join(" ")
     begin
       helpers.icon(icon, class: icon_class)
     rescue => e

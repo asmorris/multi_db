@@ -1,31 +1,9 @@
 <div class="max-w-4xl mx-auto p-6">
 
-<!-- Example Datastar thing -->
-<div
-  data-signals="{response: '', answer: ''}"
-  data-computed-correct="$response.toLowerCase() == $answer"
->
-  <div id="question"></div>
-  <button data-on-click="@get('/test')">Fetch a question</button>
-  <button
-    data-show="$answer != ''"
-    data-on-click="$response = prompt('Answer:') ?? ''"
-    style="display: none"
-  >
-    BUZZ
-  </button>
-  <div data-show="$response != ''">
-    You answered “<span data-text="$response"></span>”.
-    <span data-show="$correct">That is correct ✅</span>
-    <span data-show="!$correct">
-      The correct answer is “<span data-text="$answer"></span>” 🤷
-    </span>
-  </div>
-</div>
 
 <!-- Example Badge Components -->
 <div class="mb-8 space-y-4">
-  <h2 class="text-2xl font-bold mb-4">Badge Component Examples</h2>
+  <h2 class="font-bold mb-4">Badge Component Examples</h2>
 
   <!-- Basic Badges Row -->
   <div class="flex flex-wrap gap-2">
@@ -47,46 +25,45 @@
   </div>
 </div>
 
-<!-- Example Card Components -->
+<!-- Example Datastar Get Req -->
+  <h2 class="font-bold mb-4">DataStar Get Request Example</h2>
+<div
+  data-signals="{response: '', answer: ''}"
+  data-computed-correct="$response.toLowerCase() == $answer"
+>
+  <div id="question"></div>
+  <button class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+          data-on-click="@get('/test')"
+          data-show="$answer === ''"
+          >
+          Fetch a question
+  </button>
+  <button
+    data-show="$answer != ''"
+    class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+    data-on-click="$response = prompt('Answer:') ?? ''"
+    style="display: none"
+  >
+    Shoot your shot
+  </button>
+  <div data-show="$response != ''">
+    You answered “<span data-text="$response"></span>”.
+    <span data-show="$correct" class="text-green-500">That is correct ✅</span>
+    <span data-show="!$correct" class="text-red-500">
+      The correct answer is “<span data-text="$answer"></span>” 🤷
+    </span>
+  </div>
+</div>
 
-<%# <div class="mb-8 space-y-4"> %>
-<%#   <h2 class="text-2xl font-bold mb-4">Card Component Examples</h2> %>
-<%#%>
-<%#   <!-- Basic Card --> %>
-<%#   <%= render(Card::Component.new(title: "Basic Card", subtitle: "This is a basic card example")) do %> %>
-<%#     <p class="text-gray-600">This is the content of a basic card component with shadcn-inspired styling.</p> %>
-<%#   <% end %> %>
-<%#%>
-<%#   <!-- Elevated Card --> %>
-<%#   <%= render(Card::Component.new(title: "Elevated Card", variant: :elevated)) do %> %>
-<%#     <p class="text-gray-600">This card has an elevated shadow for more prominence.</p> %>
-<%#   <% end %> %>
-<%#%>
-<%#   <!-- Card with Footer --> %>
-<%#   <%= render(Card::Component.new( %>
-<%#     title: "Card with Footer",  %>
-<%#     subtitle: "Example with footer", %>
-<%#     footer: content_tag(:div, class: "flex gap-2") do %>
-<%#       content_tag(:button, "Action", class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm") + %>
-<%#       content_tag(:button, "Cancel", class: "text-gray-500 hover:text-gray-700 px-4 py-2 text-sm") %>
-<%#     end %>
-<%#   )) do %> %>
-<%#     <p class="text-gray-600">This card demonstrates footer content using the footer parameter.</p> %>
-<%#   <% end %> %>
-<%# </div> %>
-<%#%>
+  <h1 class="text-3xl font-bold text-center mb-8">Here's a list of my posts</h1>
 
-
-  <h1 class="text-5xl font-bold text-center mb-8">Here's a list of my posts</h1>
-
-  <div id="garby"></div>
   <!-- Form for creating new posts -->
-  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+  <div class="bg-card rounded-lg shadow-md p-6 mb-8 min-w-2xl">
     <h2 class="text-2xl font-bold mb-4">Add a New Post</h2>
     <div data-signals="{ post: {name: '', description: ''} }">
       <div class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <label class="block text-sm font-medium text-card mb-1">Name</label>
           <input type="text" 
                  data-bind="post.name"
                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
@@ -94,7 +71,7 @@
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label class="block text-sm font-medium text-card mb-1">Description</label>
           <textarea rows="3" 
                     data-bind="post.description"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" 
@@ -112,8 +89,9 @@
   </div>
 
   <!-- List of existing posts -->
-  <div class="bg-white rounded-lg shadow-md p-6" id="posts-list">
-    <h2 class="text-3xl font-bold mb-6 text-center">posts</h2>
+  <div class="bg-card rounded-lg shadow-md p-6" id="posts-list">
+    <h2 class="text-3xl font-bold mb-6 text-center text-card">Posts</h2>
+    <div id="new-posts" class='mb-4'></div>
     
     <% if @posts.any? %>
       <div id="posts-container">
