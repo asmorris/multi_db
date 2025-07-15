@@ -65,7 +65,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "datastar", "~> 1.0.0.beta.3"
+gem "datastar", "~> 1.0.0.pre.2"
 
 gem "pry", "~> 0.15.2"
 gem "pry-byebug", "~> 3.11"
