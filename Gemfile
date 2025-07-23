@@ -71,7 +71,7 @@ gem "pry", "~> 0.15.2"
 gem "pry-byebug", "~> 3.11"
 
 gem "view_component", "~> 3.23"
-gem "rails_icons", "~> 1.3"
+gem "rails_icons", "~> 1.4"
 
 gem "view_component-contrib", "~> 0.2.4"
 
